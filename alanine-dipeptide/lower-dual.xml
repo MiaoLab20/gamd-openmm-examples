@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<gamd>
+    <temperature>300</temperature> <!-- unit.kelvin -->
+
+    <system>
+        <nonbonded-method>PME</nonbonded-method>
+        <nonbonded-cutoff>0.8</nonbonded-cutoff> <!-- unit.nanometers -->
+        <constraints>HBonds</constraints>
+    </system>
+
+    <barostat>
+        <pressure>1.0</pressure> <!-- unit.bar -->
+        <frequency>25</frequency>
+    </barostat>
+    
+    <run-minimization>True</run-minimization>
+
+    <integrator>
+        <algorithm>langevin</algorithm>
+        <boost-type>lower-dual</boost-type>
+        <sigma0>
+            <primary>6.0</primary> <!-- unit.kilocalories_per_mole -->
+            <secondary>6.0</secondary> <!-- unit.kilocalories_per_mole -->
+        </sigma0>
+        <random-seed>4321</random-seed>
+        <dt>0.002</dt> <!-- unit.picoseconds -->
+        <friction-coefficient>1.0</friction-coefficient> <!-- unit.picoseconds**-1 -->
+        <number-of-steps> <!-- quick test -->
+            <conventional-md-prep>2000</conventional-md-prep>
+            <conventional-md>10000</conventional-md>
+            <gamd-equilibration-prep>2000</gamd-equilibration-prep>
+            <gamd-equilibration>20000</gamd-equilibration>
+            <gamd-production>30000</gamd-production>
+            <averaging-window-interval>50</averaging-window-interval>
+        </number-of-steps>
+    </integrator>
+
+    <input-files>
+        <amber>
+            <topology>data/dip.prmtop</topology>
+            <coordinates type="rst7">data/md-4ns.rst7</coordinates>
+        </amber>
+    </input-files>
+
+    <outputs>
+        <directory>quick-output/lower-dual/</directory>
+        <overwrite-output>True</overwrite-output>
+
+        <reporting>
+            <energy>
+                <interval>50</interval>
+            </energy>
+            <coordinates>
+                <file-type>DCD</file-type>
+            </coordinates>
+            <statistics>
+                <interval>50</interval>
+            </statistics>
+        </reporting>
+    </outputs>
+</gamd>
