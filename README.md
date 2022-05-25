@@ -30,7 +30,7 @@ cd alanine-dipeptide
 gamdRunner xml lower-dual.xml
 ```
 
-You should see various running information output by the gamdRunner before it reports a prompt.  You may see a warning message about importing simtk.openmm being deprecated.  This can be safely ignored at this time.
+This will run a CUDA based simulation.  You have don't have a CUDA capable GPU, please see the instructions below for how to start a simulation using a different platform.  You should see various running information output by the gamdRunner before it reports a prompt.  You may see a warning message about importing simtk.openmm being deprecated.  This can be safely ignored at this time.
 
 When the program is complete, you should find a directory like quick-output/lower-dual/ with the output files for your gamd run.  Note that the runner copies a duplicate of your configuration file into the output directory called input.xml, so that you'll have everything together in one directory for archival.  This example generates the output as a .dcd file.  The gamd.log file contains information about the gamd run from the very beginning.  The file gamd-reweighting.log contains only the gamd information, since the start of the production phase for use in later analysis.  The file gamd-restart.dat contains information about the potential energy and standard deviation at the end of equilibration phase.  The file gamd-running.csv contains information about the different energy and gamd values, which can be useful in figuring out if you need to adjust your initial conditions.
 
@@ -60,4 +60,26 @@ You should see messages indicating that it is restarting from the saved checkpoi
 ### Extending a simulation
 
 If you find that you need to extend the gamd production in a simulation, you can modify the gamd-production tag contents of your input file and use the restart functionality to start it up again.  It will continue where it left off.  The input.xml file in your output results directory will get updated with your new input.xml file.
+
+
+### Running an OpenCL based simulation
+
+It's important to note that the platform passed to OpenMM to use OpenCL is case sensitive.  We'll we've attempted to make the gamdRunner intelligent enough if you don't get it correct, the correct platform name/case is OpenCL.  Below is an example of how to execute the alanine dipeptide simulation using OpenCL.
+
+
+```
+cd alanine-dipeptide
+gamdRunner -p OpenCL xml lower-dual.xml
+```
+
+### Running a CPU based simulation
+
+It's important to note that the platform passed to OpenMM to use CPU is case sensitive.  We'll we've attempted to make the gamdRunner intelligent enough if you don't get it correct, the correct platform name/case is CPU.  If you want to limit the number of CPU cores that OpenMM utilizies, you should set the environment variable to OPENMM_CPU_THREADS to the number of cores you want it to you.  Below is an example of how to execute the alanine dipeptide simulation using the CPU and only three cores under the bash shell.
+
+
+```
+export OPENMM_CPU_THREADS=3
+cd alanine-dipeptide
+gamdRunner -p CPU xml lower-dual.xml
+```
 
