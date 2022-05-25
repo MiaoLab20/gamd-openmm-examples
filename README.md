@@ -83,3 +83,35 @@ cd alanine-dipeptide
 gamdRunner -p CPU xml lower-dual.xml
 ```
 
+
+### Controlling which GPU(s) the simulation starts on
+
+If you have multiple GPUs in your system, you may want to start different simulations on different GPUs or be able to run a single simulation across multiple GPUs.
+
+The gamdRunner defaults to running on the first GPU (GPU 0).  If you want to have OpenMM execute on GPU 1, you would execute the job as follows:
+
+```
+gamdRunner -d 1 xml lower-dual.xml
+```
+
+The same -d flag is used for both OpenCL and CUDA jobs, so you can add the -p OpenCL to execute the job on GPU 1 using the OpenCL platform.
+
+If you want to run on multiple GPUs, then passing a comma delimited list as an argument to the -d flag will make this happen.  For example, in the following command, OpenMM will run the job on 2nd and 3rd GPU in your system, which is GPU 1 and 2, since GPU numbering is zero based.
+```
+gamdRunner -p OpenCL -d 1,2 xml lower-dual.xml
+```
+
+### Controlling the output directory
+
+Sometimes, you want to use the same configuration file for multiple runs, but overriding the output directory in the configuration file.  This can be especially useful when you are executing the same simulation multiple times for comparison.  The -o flag controls what directory all of the output will be placed into.  NOTE:  The input.xml found in the output directory will also have it's output's directory tag contents updated, when this flag is used.
+
+```
+gamdRunner -o quick-test-output/1/ lower-dual.xml
+```
+
+As an example of how this can be useful, the gamd developers use this feature to allow us to easily script running multiple simulations with the same configuration file.
+
+### What's this debug flag?
+
+The debug flag will turn on some internal debugging features within the gamdRunner.  It will cause information about the state of the gamd variables to be output to the file debug.csv in the output directory.  *Turning this feature on will slow down your simulation.*  It's normally only used if you are developing new algorithms, or if you believe there is a problem with the gamd algorithm that you need to trace.  We do not recommend enabling this as a part of any normal simulations.
+
