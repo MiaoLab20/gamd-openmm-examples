@@ -12,7 +12,7 @@ cd gamd-openmm-examples
 
 ```
 
-You'll find example alanine dipeptide project and a dihydrofolate reductase directories in this project.  The configuration files for both projects have been set to have a very short running time, so that you can validate that your installation is completely working without having to wait for a long simulation to run.  You can verify that your path is setup tot he gamdRunner correctly by just typing *gamdRunner* on the command line.  You should see an output that appears something like the following:
+You'll find example alanine dipeptide project and a dihydrofolate reductase directories in this project.  The configuration files for both projects have been set to have a very short running time, so that you can validate that your installation is completely working without having to wait for a long simulation to run.  You can verify that your path is setup to the gamdRunner correctly by just typing *gamdRunner* on the command line.  You should see an output that appears something like the following:
 
 ```
 
