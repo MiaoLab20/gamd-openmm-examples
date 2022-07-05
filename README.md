@@ -106,10 +106,50 @@ gamdRunner -p OpenCL -d 1,2 xml lower-dual.xml
 Sometimes, you want to use the same configuration file for multiple runs, but overriding the output directory in the configuration file.  This can be especially useful when you are executing the same simulation multiple times for comparison.  The -o flag controls what directory all of the output will be placed into.  NOTE:  The input.xml found in the output directory will also have it's output's directory tag contents updated, when this flag is used.
 
 ```
-gamdRunner -o quick-test-output/1/ lower-dual.xml
+gamdRunner -o quick-test-output/1/ xml lower-dual.xml
 ```
 
 As an example of how this can be useful, the gamd developers use this feature to allow us to easily script running multiple simulations with the same configuration file.
+
+### Changing the boost type
+
+The configuration file, in this case, lower-dual.xml contains a tag called boost-type within it.  Right now, the following boost types have been implemented for the OpenMM GaMD.  The value you would put into the boost-type tag is in parenthesis.
+
+* Lower Bound - Total Boost (lower-total)
+* Lower Bound - Dihedral Boost (lower-dihedral)
+* Lower Bound - Dual Total/Dihedral Boost (lower-dual)
+* Lower Bound - Non-Bonded Boost (lower-nonbonded)
+* Lower Bound - Dual Non-Bonded/Dihedral Boost (lower-dual-nonbonded-dihedral)
+* Upper Bound - Total Boost (upper-total)
+* Upper Bound - Dihedral Boost (Upper-dihedral)
+* Upper Bound - Dual Total/Dihedral Boost (upper-dual)
+* Upper Bound - Non-Bonded Boost (upper-nonbonded)
+* Upper Bound - Dual Non-Bonded/Dihedral Boost (upper-dual-nonbonded-dihedral)
+
+
+Now, copy the lower-dual.xml file to a new filename using one of the above boost types.  For this example, I'll use the Lower Total Boost.
+
+```
+cp lower-dual.xml lower-total.xml
+```
+
+Using your favorite edir, open the lower-total.xml file and find and replace all instances of lower-dual with lower-total.  You should see a tag like the following on line 20 and an output directory around line 46
+
+```
+        <boost-type>lower-dual</boost-type>
+```
+```
+	<directory>quick-output/lower-dual/</directory>
+```
+
+Once you have changed the two instances of lower-dual to lower total, save the file, and exit the editor.
+
+You can now run your simulation using the following command, and the output should show up under quick-output/lower-total/
+
+```
+gamdRunner xml lower-total.xml
+```
+
 
 ### What's this debug flag?
 
