@@ -126,6 +126,8 @@ The configuration file, in this case, lower-dual.xml contains a tag called boost
 * Upper Bound - Non-Bonded Boost (upper-nonbonded)
 * Upper Bound - Dual Non-Bonded/Dihedral Boost (upper-dual-nonbonded-dihedral)
 
+* LiGaMD and Pep-GaMD have not yet been implemented.
+
 
 Now, copy the lower-dual.xml file to a new filename using one of the above boost types.  For this example, I'll use the Lower Total Boost.
 
@@ -149,6 +151,22 @@ You can now run your simulation using the following command, and the output shou
 ```
 gamdRunner xml lower-total.xml
 ```
+
+### Configuration values
+
+If you open the lower-dual.xml file, you'll notice all of the different configuration values that you can customize for your simulation, including input files, sigma0 values, time step, simulation length and GaMD stage lengths.  It should be noted that the gamd-openmm code does not currently support splitting the conventional md, gamd equilibration, and gamd production phases into seperate executions.  It must be run all at once.  As some of the values in the number-of-steps have overlap, if you are unfamiliar with these values, we have found that the graphic found at the top of the [Amber manual page on the Miao Lab website](http://miaolab.org/GaMD/manual.html), to be helpful in understanding how this works.  If you are used to using the Amber names, the following values are equivalent from the XML file.
+
+* conventional-md-prep = ntcmdprep 
+* conventional-md = ntcmd
+* gamd-equilibration-prep = ntebprep
+* gamd-equilibration = nteb
+* gamd-production = nstlim
+* averaging-window-interval = ntave
+* sigma0 primary = sigma0P
+* sigma0 secondary = sigma0D
+
+The integrator algorithm of langevin does not have another value it can be set to currently.  The [gamd-openmm](https://github.com/MiaoLab20/gamd-openmm) project contains an annotated example configuration file with different input options called [example.xml in the docs directory](https://github.com/MiaoLab20/gamd-openmm/blob/main/docs/example.xml).
+
 
 
 ### What's this debug flag?
