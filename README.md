@@ -113,21 +113,20 @@ As an example of how this can be useful, the gamd developers use this feature to
 
 ### Changing the boost type
 
-The configuration file, in this case, lower-dual.xml contains a tag called boost-type within it.  Right now, the following boost types have been implemented for the OpenMM GaMD.  The value you would put into the boost-type tag is in parenthesis.
+The configuration file lower-dual.xml contains a tag called _boost-type_. The following boost types are currently implemented for GaMD in OpenMM. Values for the _boost-type_ tag can be set to one of the following: 
 
-* Lower Bound - Total Boost (lower-total)
-* Lower Bound - Dihedral Boost (lower-dihedral)
-* Lower Bound - Dual Total/Dihedral Boost (lower-dual)
-* Lower Bound - Non-Bonded Boost (lower-nonbonded)
-* Lower Bound - Dual Non-Bonded/Dihedral Boost (lower-dual-nonbonded-dihedral)
-* Upper Bound - Total Boost (upper-total)
-* Upper Bound - Dihedral Boost (Upper-dihedral)
-* Upper Bound - Dual Total/Dihedral Boost (upper-dual)
-* Upper Bound - Non-Bonded Boost (upper-nonbonded)
-* Upper Bound - Dual Non-Bonded/Dihedral Boost (upper-dual-nonbonded-dihedral)
-
-* LiGaMD and Pep-GaMD have not yet been implemented.
-
+* **lower-total**: a boost potential is applied to the total potential energy of the system with the threshold energy set to its lower bound. 
+* **lower-dihedral**: a boost potential is applied to the dihedral potential energy of the system with the threshold energy set to its lower bound. 
+* **lower-dual**: boost potentials are applied to the total and dihedral potential energy of the system with the threshold energy set to their lower bounds. 
+* **lower-nonbonded**: a boost potential is applied to the nonbonded potential energy of the system with the threshold energy set to its lower bound. 
+* **lower-dual-nonbonded-dihedral**: boost potentials are applied to the nonbonded and dihedral potential energy of the system with the threshold energy set to their lower bounds. 
+* **upper-total**: a boost potential is applied to the total potential energy of the system with the threshold energy set to its upper bound. 
+* **upper-dihedral**: a boost potential is applied to the dihedral potential energy of the system with the threshold energy set to its upper bound. 
+* **upper-dual**: boost potentials are applied to the total and dihedral potential energy of the system with the threshold energy set to their upper bounds. 
+* **upper-nonbonded**: a boost potential is applied to the nonbonded potential energy of the system with the threshold energy set to its upper bound. 
+* **upper-dual-nonbonded-dihedral**: boost potentials are applied to the nonbonded and dihedral potential energy of the system with the threshold energy set to their upper bounds.  
+ 
+Generally speaking, dual-boost GaMD provides higher acceleration of biomolecular simulations than only the dihedral or total potential boost GaMD. It should be the default option with the threshold energy set to lower bound (_lower-dual_) for simulations of a new system. In case even higher acceleration is needed, the dual-boost GaMD with the threshold energy set to upper bound (_upper-dual_) can be used. GaMD with boost applied to the non-bonded potential energy including _lower-nonbonded_, _lower-dual-nonbonded-dihedral_, _upper-nonbonded_ and _upper-dual-nonbonded-dihedral_ can be more efficient for simulations of non-covalent biomolecular binding. 
 
 Now, copy the lower-dual.xml file to a new filename using one of the above boost types.  For this example, I'll use the Lower Total Boost.
 
