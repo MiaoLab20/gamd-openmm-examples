@@ -128,8 +128,6 @@ The configuration file lower-dual.xml contains a tag called _boost-type_. The fo
  
 Generally speaking, dual-boost GaMD provides higher acceleration of biomolecular simulations than only the dihedral or total potential boost GaMD. It should be the default option with the threshold energy set to lower bound (_lower-dual_) for simulations of a new system. In case even higher acceleration is needed, the dual-boost GaMD with the threshold energy set to upper bound (_upper-dual_) can be used. GaMD with boost applied to the non-bonded potential energy including _lower-nonbonded_, _lower-dual-nonbonded-dihedral_, _upper-nonbonded_ and _upper-dual-nonbonded-dihedral_ can be more efficient for simulations of non-covalent biomolecular binding. 
 
-The statistics value in the reporting tag section controls the output interval for the DCD file, checkpoint file, and the gamd log file.  The reporting energy tag controls the rate of reporting for the state data reporter.
-
 Now, copy the lower-dual.xml file to a new filename using one of the above boost types.  For this example, I'll use the Lower Total Boost.
 
 ```
@@ -168,6 +166,7 @@ If you open the lower-dual.xml file, you'll notice all of the different configur
 
 The integrator algorithm of langevin does not have another value it can be set to currently.  The [gamd-openmm](https://github.com/MiaoLab20/gamd-openmm) project contains an annotated example configuration file with different input options called [example.xml in the docs directory](https://github.com/MiaoLab20/gamd-openmm/blob/main/docs/example.xml).
 
+The statistics value in the reporting tag section controls the output interval for the DCD file, checkpoint file, and the gamd log file.  The reporting energy tag controls the rate of reporting for the state data reporter.
 
 
 ### What's this debug flag?
