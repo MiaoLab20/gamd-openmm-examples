@@ -59,7 +59,7 @@ You should see messages indicating that it is restarting from the saved checkpoi
 
 ### Extending a simulation
 
-If you find that you need to extend the gamd production in a simulation, you can modify the gamd-production tag contents of your input file and use the restart functionality to start it up again.  It will continue where it left off.  The input.xml file in your output results directory will get updated with your new input.xml file.
+If you find that you need to extend the gamd production in a simulation, you can modify the gamd-production tag contents of your input file and use the restart functionality to start it up again, just like in the above section.  It will skip the conventional MD and equilibration steps, and start from where it left off in the gamd production portion until it gets to the new stopping point you have provided.  The input.xml file in your output results directory will get updated with your new input.xml file.
 
 
 ### Running an OpenCL based simulation
